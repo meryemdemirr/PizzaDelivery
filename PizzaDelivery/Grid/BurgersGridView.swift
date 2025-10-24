@@ -10,8 +10,7 @@ import SwiftUI
 struct BurgersGridView: View {
     let burgers: [Burger] = [
             Burger(name: "Chicken Burger", imageName: "burger1", price: "200"),
-            Burger(name: "Double Burger", imageName: "burger1", price: "280"),
-            Burger(name: "Cheese Burger", imageName: "burger1", price: "240")
+           
         ]
         
         let columns = [GridItem(.flexible()), GridItem(.flexible())]
@@ -26,6 +25,7 @@ struct BurgersGridView: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 10)
             }
+            
         }
 }
 

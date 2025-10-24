@@ -10,7 +10,6 @@ import SwiftUI
 struct Item: View {
     
     var body: some View {
-        
     }
 }
 

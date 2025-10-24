@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var selectedCategory: String? = nil
+    @State private var showSheet = false // 💡
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 25) {
                 VStack {
                     HStack {
@@ -33,7 +35,7 @@ struct HomeView: View {
                 
                 
                 VStack(spacing: 20) {
-                    HStack {
+                    HStack  {
                         Text("Extra Discount")
                             .font(.system(size: 20, weight: .bold))
                             
@@ -67,12 +69,41 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.leading, 10)
                     
-                    
+               
                     HStack(spacing: 15) {
                         
-                        CategoryButton(title: "Pizza", imageName: "pizza slice")
-                        CategoryButton(title: "Burger", imageName: "burger")
-                        CategoryButton(title: "Pasta", imageName: "pasta")
+                        NavigationLink(
+                            destination: PizzasGridView(),
+                                tag: "Pizza",
+                                selection: $selectedCategory
+                        ) {
+                            CategoryButton(title: "Pizza",
+                                imageName: "pizza slice",
+                                isSelected: selectedCategory == "Pizza")
+                        }
+                       
+                        NavigationLink(
+                            destination: BurgersGridView(),
+                                tag: "Burger",
+                                selection: $selectedCategory
+                        ) {
+                            CategoryButton(title: "Burger",
+                                imageName: "burger",
+                                isSelected: selectedCategory == "Burger")
+                        }
+                       
+                        
+                        NavigationLink(
+                            destination: PastasGridView(),
+                                tag: "Pasta",
+                                selection: $selectedCategory
+                        ) {
+                            CategoryButton(title: "Pasta",
+                                imageName: "pasta",
+                                isSelected: selectedCategory == "Pasta")
+                        }
+                       
+                       
                         
                     }
                 }
@@ -87,6 +118,8 @@ struct HomeView: View {
                             .padding(.leading, 10)
 
                     }
+                    
+                    PizzasGridView()
                 }
                
             }
@@ -98,6 +131,37 @@ struct HomeView: View {
 
 
 struct CategoryButton: View {
+    var title: String
+    var imageName: String
+    var isSelected: Bool  // 💡 dışarıdan alınacak
+
+    var body: some View {
+        HStack {
+            Image(imageName)
+                .resizable()
+                .renderingMode(isSelected ? .original : .template)
+                .foregroundColor(isSelected ? .red : .gray)
+                .scaledToFit()
+                .frame(width: 24, height: 24)
+            
+            Text(title)
+                .foregroundColor(isSelected ? .red : .black)
+                .font(.headline)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 8)
+        .padding(.horizontal, 14)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(isSelected ? Color.red : Color.gray.opacity(0.5), lineWidth: 2)
+        )
+        .shadow(radius: 1)
+    }
+}
+
+
+
+/*struct CategoryButton: View {
     let title: String
     let imageName: String
     @State private var isSelected = false
@@ -126,7 +190,7 @@ struct CategoryButton: View {
         }
     }
 }
-
+*/
 
 #Preview {
     HomeView()

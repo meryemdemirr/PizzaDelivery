@@ -9,9 +9,9 @@ import SwiftUI
 
 struct PastasGridView: View {
     let pastas: [Pasta] = [
-            Pasta(name: "Chicken Burger", imageName: "burger1", price: "200"),
-            Pasta(name: "Double Burger", imageName: "burger1", price: "280"),
-            Pasta(name: "Cheese Burger", imageName: "burger1", price: "240")
+            Pasta(name: "Fettucini", imageName: "pasta", price: "200"),
+            Pasta(name: "Margarita Makarna", imageName: "pasta1", price: "190"),
+            
         ]
         
         let columns = [GridItem(.flexible()), GridItem(.flexible())]
@@ -28,7 +28,7 @@ struct PastasGridView: View {
             }
         }
     }
-}
+
 
 #Preview {
     PastasGridView()
